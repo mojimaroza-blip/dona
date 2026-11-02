@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Cart | Ga Dona</title><link rel="stylesheet" href="style.css"></head><body>
+<header><nav class="nav"><a class="logo" href="index.html">GA <span>DONA</span> ✦</a><div class="links"><a href="index.html">HOME</a><a href="menu.html">MENU</a><a href="about.html">ABOUT US</a><a href="account.html">ACCOUNT</a></div><a class="cartlink" href="cart.html">🛒 CART <span class="cart-count">0</span></a></nav></header>
+<div class="pagehero"><div class="kicker">Almost there</div><h1 class="page-title">YOUR <span style="color:var(--yellow)">CART</span> 🛒</h1><p>Review your items and send your order to Ga Dona on WhatsApp.</p></div>
+<section class="wrap"><div class="cart-layout"><div class="cartbox"><h2>Your items</h2><div id="cart-items"></div><a href="menu.html" class="outline" style="display:inline-block;margin-top:18px">← Continue shopping</a></div>
+<div class="checkoutbox"><h2>Order summary</h2><div class="summaryline"><span>Subtotal</span><strong id="subtotal">R0.00</strong></div><div class="summaryline"><span>Delivery fee</span><strong id="fee">R0.00</strong></div><div class="summaryline total"><span>Total</span><strong id="total">R0.00</strong></div>
+<form class="form" id="checkout"><label>Your name<input id="name" required placeholder="Name and surname"></label><label>Phone number<input id="phone" required type="tel" placeholder="Your contact number"></label><label>Collection or delivery<select id="type"><option value="Collection">Collection (free)</option><option value="Delivery">Delivery (+ R15)</option></select></label><label id="loclabel" style="display:none">Delivery location<textarea id="location" placeholder="Your address / location"></textarea></label><label>Payment preference<select id="pay"><option>EFT (confirm details on WhatsApp)</option><option>Cash on collection</option><option>Cash on delivery</option></select></label><label>Order notes<textarea id="notes" placeholder="Special requests (optional)"></textarea></label><button class="btn" type="submit">SEND ORDER ON WHATSAPP ↗</button><p style="font-size:.78rem">📍 Ga Dona, Mphanama</p></form></div></div></section><footer><strong>GA DONA KOTA</strong> • WhatsApp +27 76 313 2486</footer>
+<script>
+const WHATSAPP="27763132486";
+const PRODUCTS=[
+["Budget Kota","Chips, atchaar, polony, vienna & lettuce",25,"KOTAS"],
+["Cheese / Egg Choice","Chips, atchaar, polony, vienna, lettuce & cheese OR egg",28,"KOTAS"],
+["Cheese Egg Combo","Chips, atchaar, polony, vienna, lettuce, egg & cheese",30,"KOTAS"],
+["Meaty Kota","Chips, atchaar, polony, vienna, lettuce & russian",32,"KOTAS"],
+["Meaty Cheese / Egg Choice","Chips, atchaar, polony, vienna, lettuce, russian & egg OR cheese",35,"KOTAS"],
+["Fully Loaded","Chips, atchaar, polony, vienna, lettuce, russian, cheese & egg",45,"KOTAS"],
+["Small Chips","Golden crispy chips",25,"CHIPS"],
+["Medium Chips","Golden crispy chips",30,"CHIPS"],
+["Large Chips","Golden crispy chips",35,"CHIPS"],
+["Extra Large Chips","Golden crispy chips",42,"CHIPS"],
+["2L Flavoured Cooldrink","Choose your flavour",30,"DRINKS"],
+["2L Coke","Coca-Cola 2 litre",33,"DRINKS"],
+["1.25L Cooldrink","Assorted flavour",17,"DRINKS"],
+["1.5L Cappy Juice","Cappy fruit juice",40,"DRINKS"],
+["Coke Can","Chilled can",15,"CANS"],
+["Cappy Can","Chilled can",20,"CANS"],
+["Dry Lemon Can","Chilled can",23,"CANS"],
+["Tonic Water Can","Chilled can",23,"CANS"],
+["Egg","Extra topping",5,"EXTRAS"],
+["Vianna","Extra topping",7,"EXTRAS"],
+["Cheese","Extra topping",5,"EXTRAS"],
+["Polony","Extra topping",5,"EXTRAS"],
+["Russian","Extra topping",15,"EXTRAS"]
+];
+function getCart(){return JSON.parse(localStorage.getItem("gadona_cart")||"[]")}
+function saveCart(c){localStorage.setItem("gadona_cart",JSON.stringify(c));updateCount()}
+function updateCount(){let n=getCart().reduce((s,x)=>s+x.qty,0);document.querySelectorAll(".cart-count").forEach(el=>el.textContent=n)}
+function addProduct(idx){let c=getCart(),p=PRODUCTS[idx],item=c.find(x=>x.id===idx);if(item)item.qty++;else c.push({id:idx,name:p[0],price:p[2],qty:1});saveCart(c);alert(p[0]+" added to your cart!")}
+function money(n){return "R"+Number(n).toFixed(2)}
+function updateCount(){let n=getCart().reduce((s,x)=>s+x.qty,0);document.querySelectorAll(".cart-count").forEach(el=>el.textContent=n)}
+function productCards(categories){let ids=PRODUCTS.map((p,i)=>({p,i})).filter(x=>categories.includes(x.p[3]));return ids.map(({p,i})=>`<article class="card"><div class="label">${p[3]} • GA DONA</div><h3>${p[0]}</h3><p>${p[1]}</p><div class="cardbottom"><span class="price">${money(p[2])}</span><button class="add" onclick="addProduct(${i})">＋ ADD</button></div></article>`).join("")}
+document.addEventListener("DOMContentLoaded",updateCount);
+
+const list=document.getElementById("cart-items");
+function renderCartPage(){const c=getCart();if(!c.length){list.innerHTML='<div class="empty">Your cart is empty 😋<br><a href="menu.html" style="color:var(--yellow)">Browse our menu</a></div>';}else{list.innerHTML=c.map((x,i)=>'<div class="cartrow"><div><strong>'+x.name+'</strong><small>'+money(x.price)+' each</small><div class="qty"><button type="button" onclick="qtyChange('+i+',-1)">−</button><span>'+x.qty+'</span><button type="button" onclick="qtyChange('+i+',1)">＋</button></div></div><strong>'+money(x.price*x.qty)+'</strong></div>').join('');}const sub=c.reduce((s,x)=>s+x.price*x.qty,0),fee=document.getElementById("type").value==="Delivery"&&c.length?15:0;document.getElementById("subtotal").textContent=money(sub);document.getElementById("fee").textContent=money(fee);document.getElementById("total").textContent=money(sub+fee);}
+function qtyChange(i,d){let c=getCart();c[i].qty+=d;if(c[i].qty<1)c.splice(i,1);saveCart(c);renderCartPage();}
+document.getElementById("type").addEventListener("change",()=>{document.getElementById("loclabel").style.display=document.getElementById("type").value==="Delivery"?"block":"none";renderCartPage();});
+document.getElementById("checkout").addEventListener("submit",e=>{e.preventDefault();const c=getCart();if(!c.length){alert("Your cart is empty.");return;}const name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),type=document.getElementById("type").value,loc=document.getElementById("location").value.trim();if(type==="Delivery"&&!loc){alert("Please enter your delivery location.");return;}const sub=c.reduce((s,x)=>s+x.price*x.qty,0),fee=type==="Delivery"?15:0;let msg="🍟 *GA DONA KOTA ORDER*\n\n👤 Name: "+name+"\n📞 Phone: "+phone+"\n📦 "+type+(type==="Delivery"?"\n📍 Location: "+loc:"")+"\n💳 Payment: "+document.getElementById("pay").value+"\n\n*ITEMS*\n";c.forEach(x=>msg+="• "+x.name+" x"+x.qty+" — "+money(x.price*x.qty)+"\n");msg+="\nSubtotal: "+money(sub)+"\nDelivery: "+money(fee)+"\n*TOTAL: "+money(sub+fee)+"*";let notes=document.getElementById("notes").value.trim();if(notes)msg+="\n📝 Notes: "+notes;msg+="\n\nPlease confirm my order. Thank you!";window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");});renderCartPage();
+</script></body></html>
