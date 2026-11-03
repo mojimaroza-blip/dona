@@ -1,41 +1,329 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ga Dona Kota | Kota ke kota ka borotho</title><link rel="stylesheet" href="style.css"></head><body>
-<header><nav class="nav"><a class="logo" href="index.html">GA <span>DONA</span> ✦</a><div class="links"><a href="index.html">HOME</a><a href="menu.html">MENU</a><a href="about.html">ABOUT US</a><a href="account.html">ACCOUNT</a></div><a class="cartlink" href="cart.html">🛒 CART <span class="cart-count">0</span></a></nav></header>
-<main><section class="hero" id="home"><div><div class="kicker">Good food • Great taste • Always fresh</div><h1>KOTA KE KOTA<br><span>KA BOROTHO.</span></h1><p>Fresh, flavour-packed kotas made with love. Choose your favourite, add a cool drink, and order from Ga Dona.</p><div class="actions"><a class="btn" href="menu.html">🍟 ORDER NOW →</a><a class="outline" href="menu.html">VIEW MENU</a></div><p style="margin-top:22px;color:var(--yellow);font-weight:900">📍 Mphanama • 🔥 Hot & fresh</p></div><div class="visual"><img class="spin-kota" src="kota-360.png" alt="Ga Dona loaded kota rotating 360 degrees"></div></section><div class="ticker">KOTA KE KOTA • KA BOROTHO • GOOD FOOD, GREAT TASTE</div>
-<section class="wrap"><div class="heading"><div><div class="kicker">Fresh from our kitchen</div><h2>OUR CUSTOMER FAVOURITES</h2></div><a class="outline" href="menu.html">See full menu →</a></div><div class="cards" id="favourites"></div></section>
-<section class="wrap"><div class="heading"><div><div class="kicker">Why Ga Dona?</div><h2>MADE WITH LOVE.</h2></div></div><div class="features"><div class="feature"><b>🍟 Proper Kota</b><p>Big flavour and satisfying portions.</p></div><div class="feature"><b>🥬 Fresh Ingredients</b><p>Prepared with care for every order.</p></div><div class="feature"><b>📍 Local Love</b><p>Proudly serving from Mphanama.</p></div><div class="feature"><b>💬 Easy Ordering</b><p>Order simply through WhatsApp.</p></div></div><div style="text-align:center;margin-top:35px"><a class="btn" href="menu.html">START YOUR ORDER →</a></div></section>
-</main><footer><strong>GA DONA KOTA</strong> • Kota ke kota ka borotho!<br>📍 Mphanama • WhatsApp +27 76 313 2486<br>© <span id="yr"></span> Ga Dona</footer><script>
-const WHATSAPP="27763132486";
-const PRODUCTS=[
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Ga Dona Kota | Kota ke kota ka borotho</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<nav class="nav">
+
+<a class="logo" href="index.html">GA <span>DONA</span> ✦</a>
+
+<div class="links">
+<a href="index.html">HOME</a>
+<a href="menu.html">MENU</a>
+<a href="about.html">ABOUT US</a>
+<a href="account.html">ACCOUNT</a>
+</div>
+
+<a class="cartlink" href="cart.html">
+🛒 CART <span class="cart-count">0</span>
+</a>
+
+</nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+
+<div>
+
+<div class="kicker">Good food • Great taste • Always fresh</div>
+
+<h1>KOTA KE KOTA<br>
+<span>KA BOROTHO.</span></h1>
+
+<p>
+Fresh, flavour-packed kotas made with love.
+Choose your favourite, add a cool drink,
+and order from Ga Dona.
+</p>
+
+<div class="actions">
+<a class="btn" href="menu.html">🍟 ORDER NOW →</a>
+<a class="outline" href="menu.html">VIEW MENU</a>
+</div>
+
+<p style="margin-top:22px;color:var(--yellow);font-weight:900">
+📍 Mphanama • 🔥 Hot & fresh
+</p>
+
+</div>
+
+<div class="visual">
+<img class="spin-kota"
+src="kota-360.png"
+alt="Ga Dona loaded kota rotating 360 degrees">
+</div>
+
+</section>
+
+<div class="ticker">
+KOTA KE KOTA • KA BOROTHO • GOOD FOOD, GREAT TASTE
+</div>
+
+<section class="wrap">
+
+<div class="heading">
+
+<div>
+<div class="kicker">Fresh from our kitchen</div>
+<h2>OUR CUSTOMER FAVOURITES</h2>
+</div>
+
+<a class="outline" href="menu.html">See full menu →</a>
+
+</div>
+
+<div class="cards" id="favourites"></div>
+
+</section>
+
+<section class="wrap">
+
+<div class="heading">
+
+<div>
+<div class="kicker">Why Ga Dona?</div>
+<h2>MADE WITH LOVE.</h2>
+</div>
+
+</div>
+
+<div class="features">
+
+<div class="feature">
+<b>🍟 Proper Kota</b>
+<p>Big flavour and satisfying portions.</p>
+</div>
+
+<div class="feature">
+<b>🥬 Fresh Ingredients</b>
+<p>Prepared with care for every order.</p>
+</div>
+
+<div class="feature">
+<b>📍 Local Love</b>
+<p>Proudly serving from Mphanama.</p>
+</div>
+
+<div class="feature">
+<b>💬 Easy Ordering</b>
+<p>Order simply through WhatsApp.</p>
+</div>
+
+</div>
+
+<div style="text-align:center;margin-top:35px">
+<a class="btn" href="menu.html">START YOUR ORDER →</a>
+</div>
+
+</section>
+
+</main>
+
+<!-- GA DONA FOOTER + TECH DESIGN ZA -->
+<footer style="text-align:center;padding:35px 15px">
+
+<strong>GA DONA KOTA</strong> • Kota ke kota ka borotho!
+
+<br>
+
+📍 Mphanama • WhatsApp +27 76 313 2486
+
+<br>
+
+© <span id="yr"></span> Ga Dona
+
+<div style="margin-top:25px">
+
+<p style="color:#aaa;font-size:12px;letter-spacing:2px">
+WEBSITE DESIGNED & DEVELOPED BY
+</p>
+
+<a href="https://mojimaroza-blip.github.io/website/"
+target="_blank"
+rel="noopener noreferrer"
+style="display:inline-block;
+background:#ffb000;
+color:#111;
+padding:12px 25px;
+border-radius:8px;
+text-decoration:none;
+font-weight:900;
+margin-top:8px">
+
+💻 TECH DESIGN ZA — VISIT OUR WEBSITE
+
+</a>
+
+</div>
+
+</footer>
+
+<script>
+
+const WHATSAPP = "27763132486";
+
+const PRODUCTS = [
+
 ["Budget Kota","Chips, atchaar, polony, vienna & lettuce",25,"KOTAS"],
+
 ["Cheese / Egg Choice","Chips, atchaar, polony, vienna, lettuce & cheese OR egg",28,"KOTAS"],
+
 ["Cheese Egg Combo","Chips, atchaar, polony, vienna, lettuce, egg & cheese",30,"KOTAS"],
+
 ["Meaty Kota","Chips, atchaar, polony, vienna, lettuce & russian",32,"KOTAS"],
+
 ["Meaty Cheese / Egg Choice","Chips, atchaar, polony, vienna, lettuce, russian & egg OR cheese",35,"KOTAS"],
+
 ["Fully Loaded","Chips, atchaar, polony, vienna, lettuce, russian, cheese & egg",45,"KOTAS"],
+
 ["Small Chips","Golden crispy chips",25,"CHIPS"],
+
 ["Medium Chips","Golden crispy chips",30,"CHIPS"],
+
 ["Large Chips","Golden crispy chips",35,"CHIPS"],
+
 ["Extra Large Chips","Golden crispy chips",42,"CHIPS"],
+
 ["2L Flavoured Cooldrink","Choose your flavour",30,"DRINKS"],
+
 ["2L Coke","Coca-Cola 2 litre",33,"DRINKS"],
+
 ["1.25L Cooldrink","Assorted flavour",17,"DRINKS"],
+
 ["1.5L Cappy Juice","Cappy fruit juice",40,"DRINKS"],
+
 ["Coke Can","Chilled can",15,"CANS"],
+
 ["Cappy Can","Chilled can",20,"CANS"],
+
 ["Dry Lemon Can","Chilled can",23,"CANS"],
+
 ["Tonic Water Can","Chilled can",23,"CANS"],
+
 ["Egg","Extra topping",5,"EXTRAS"],
+
 ["Vianna","Extra topping",7,"EXTRAS"],
+
 ["Cheese","Extra topping",5,"EXTRAS"],
+
 ["Polony","Extra topping",5,"EXTRAS"],
+
 ["Russian","Extra topping",15,"EXTRAS"]
+
 ];
-function getCart(){return JSON.parse(localStorage.getItem("gadona_cart")||"[]")}
-function saveCart(c){localStorage.setItem("gadona_cart",JSON.stringify(c));updateCount()}
-function updateCount(){let n=getCart().reduce((s,x)=>s+x.qty,0);document.querySelectorAll(".cart-count").forEach(el=>el.textContent=n)}
-function addProduct(idx){let c=getCart(),p=PRODUCTS[idx],item=c.find(x=>x.id===idx);if(item)item.qty++;else c.push({id:idx,name:p[0],price:p[2],qty:1});saveCart(c);alert(p[0]+" added to your cart!")}
-function money(n){return "R"+Number(n).toFixed(2)}
-function updateCount(){let n=getCart().reduce((s,x)=>s+x.qty,0);document.querySelectorAll(".cart-count").forEach(el=>el.textContent=n)}
-function productCards(categories){let ids=PRODUCTS.map((p,i)=>({p,i})).filter(x=>categories.includes(x.p[3]));return ids.map(({p,i})=>`<article class="card"><div class="label">${p[3]} • GA DONA</div><h3>${p[0]}</h3><p>${p[1]}</p><div class="cardbottom"><span class="price">${money(p[2])}</span><button class="add" onclick="addProduct(${i})">＋ ADD</button></div></article>`).join("")}
+
+function getCart(){
+
+return JSON.parse(localStorage.getItem("gadona_cart") || "[]");
+
+}
+
+function saveCart(c){
+
+localStorage.setItem("gadona_cart",JSON.stringify(c));
+updateCount();
+
+}
+
+function updateCount(){
+
+let n = getCart().reduce((s,x)=>s+x.qty,0);
+
+document.querySelectorAll(".cart-count")
+.forEach(el=>el.textContent=n);
+
+}
+
+function addProduct(idx){
+
+let c = getCart();
+let p = PRODUCTS[idx];
+
+let item = c.find(x=>x.id===idx);
+
+if(item){
+
+item.qty++;
+
+}else{
+
+c.push({
+id:idx,
+name:p[0],
+price:p[2],
+qty:1
+});
+
+}
+
+saveCart(c);
+
+alert(p[0]+" added to your cart!");
+
+}
+
+function money(n){
+
+return "R"+Number(n).toFixed(2);
+
+}
+
+function productCards(categories){
+
+let ids = PRODUCTS.map((p,i)=>({p,i}))
+.filter(x=>categories.includes(x.p[3]));
+
+return ids.map(({p,i})=>`
+
+<article class="card">
+
+<div class="label">${p[3]} • GA DONA</div>
+
+<h3>${p[0]}</h3>
+
+<p>${p[1]}</p>
+
+<div class="cardbottom">
+
+<span class="price">${money(p[2])}</span>
+
+<button class="add" onclick="addProduct(${i})">
+＋ ADD
+</button>
+
+</div>
+
+</article>
+
+`).join("");
+
+}
+
 document.addEventListener("DOMContentLoaded",updateCount);
-document.getElementById("favourites").innerHTML=productCards(["KOTAS"]).split("</article>").slice(0,3).map(x=>x+"</article>").join("");document.getElementById("yr").textContent=new Date().getFullYear();</script></body></html>
+
+document.getElementById("favourites").innerHTML =
+productCards(["KOTAS"])
+.split("</article>")
+.slice(0,3)
+.map(x=>x+"</article>")
+.join("");
+
+document.getElementById("yr").textContent =
+new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
