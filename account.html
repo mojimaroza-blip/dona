@@ -1,12 +1,485 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ga Dona | Account</title><style>
-:root{--gold:#ffb000;--bg:#0b0b0b;--card:#181818;--text:#fff;--muted:#b7b7b7}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}header{border-bottom:1px solid #333;padding:16px 5%;display:flex;justify-content:space-between;align-items:center}.logo{font-size:1.25rem;font-weight:900;color:var(--gold);text-decoration:none}.logo span{color:#fff}nav a{color:#eee;text-decoration:none;margin-left:16px;font-size:.9rem}main{min-height:80vh;display:grid;place-items:center;padding:30px 16px}.card{width:min(440px,100%);background:var(--card);border:1px solid #333;border-radius:16px;padding:28px}.kicker{color:var(--gold);font-weight:900;letter-spacing:2px;font-size:.75rem}h1{margin:8px 0 10px;font-size:2rem}p{color:var(--muted);line-height:1.5}.tabs{display:flex;gap:8px;margin:20px 0}.tabs button{flex:1;background:#252525;color:#ddd;border:1px solid #444;padding:10px;border-radius:8px;cursor:pointer;font-weight:800}.tabs button.active{background:var(--gold);color:#111;border-color:var(--gold)}label{display:block;font-size:.85rem;font-weight:700;color:#ddd;margin:12px 0}input{display:block;width:100%;margin-top:6px;padding:12px;border-radius:8px;background:#101010;color:white;border:1px solid #444}.submit{width:100%;border:0;border-radius:8px;background:var(--gold);padding:13px;font-weight:900;cursor:pointer;margin-top:12px}.message{font-size:.9rem;margin-top:12px;word-break:break-word}.error{color:#ff7777}.small{font-size:.8rem;margin-top:14px}footer{text-align:center;color:#888;padding:20px}</style></head><body>
-<header><a class="logo" href="index.html">GA <span>DONA</span> ✦</a><nav><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="cart.html">Cart</a></nav></header><main><section class="card"><div class="kicker">YOUR GA DONA ACCOUNT</div><h1 id="title">Welcome back 👋</h1><p id="intro">Create an account to make ordering easier.</p><div id="auth-area"><div class="tabs"><button id="login-tab" class="active" type="button">LOG IN</button><button id="register-tab" type="button">CREATE ACCOUNT</button></div><form id="auth-form"><label>Email address<input type="email" id="email" required autocomplete="email" placeholder="you@example.com"></label><label>Password<input type="password" id="password" required minlength="6" placeholder="At least 6 characters"></label><div id="confirm-wrap" style="display:none"><label>Confirm password<input type="password" id="confirm" minlength="6" placeholder="Enter password again"></label></div><button class="submit" id="submit-btn">LOG IN</button></form><div class="message" id="message"></div><p class="small">Your sign-in is handled securely by Firebase.</p></div><div id="signed-in" style="display:none"><p>You are signed in as <strong id="user-email"></strong>.</p><button class="submit" id="logout-btn">LOG OUT</button></div></section></main><footer>GA DONA KOTA • Kota ke kota ka borotho!</footer>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ga Dona | Account</title>
+
+<style>
+:root {
+  --gold: #ffb000;
+  --bg: #0b0b0b;
+  --card: #181818;
+  --text: #fff;
+  --muted: #b7b7b7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+header {
+  border-bottom: 1px solid #333;
+  padding: 16px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.logo span { color: #fff; }
+
+nav a {
+  color: #eee;
+  text-decoration: none;
+  margin-left: 16px;
+  font-size: .9rem;
+}
+
+main {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  padding: 30px 16px;
+}
+
+.card {
+  width: min(440px, 100%);
+  background: var(--card);
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.kicker {
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: .75rem;
+}
+
+h1 { margin: 8px 0 10px; font-size: 2rem; }
+
+p { color: var(--muted); line-height: 1.5; }
+
+.tabs { display: flex; gap: 8px; margin: 20px 0; }
+
+.tabs button {
+  flex: 1;
+  background: #252525;
+  color: #ddd;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.tabs button.active {
+  background: var(--gold);
+  color: #111;
+  border-color: var(--gold);
+}
+
+label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 700;
+  color: #ddd;
+  margin: 12px 0;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #101010;
+  color: white;
+  border: 1px solid #444;
+}
+
+.submit {
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  background: var(--gold);
+  color: #111;
+  padding: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.message {
+  font-size: .9rem;
+  margin-top: 12px;
+  word-break: break-word;
+}
+
+.error { color: #ff7777; }
+.success { color: #7dff9b; }
+.small { font-size: .8rem; margin-top: 14px; }
+.profile-line { color: white; margin: 12px 0; }
+footer { text-align: center; color: #888; padding: 20px; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="index.html">GA <span>DONA</span> ✦</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<main>
+<section class="card">
+
+<div class="kicker">YOUR GA DONA ACCOUNT</div>
+<h1 id="title">Welcome back 👋</h1>
+<p id="intro">Create an account to make ordering easier.</p>
+
+<!-- Registration and login -->
+<div id="auth-area">
+
+  <div class="tabs">
+    <button id="login-tab" class="active" type="button">LOG IN</button>
+    <button id="register-tab" type="button">CREATE ACCOUNT</button>
+  </div>
+
+  <form id="auth-form">
+
+    <div id="name-wrap" style="display:none">
+      <label>Full name
+        <input type="text" id="fullname" autocomplete="name"
+        placeholder="Your full name">
+      </label>
+    </div>
+
+    <div id="phone-wrap" style="display:none">
+      <label>Phone number
+        <input type="tel" id="phone" autocomplete="tel"
+        placeholder="e.g. 0761234567">
+      </label>
+    </div>
+
+    <label>Email address
+      <input type="email" id="email" required autocomplete="email"
+      placeholder="you@example.com">
+    </label>
+
+    <label>Password
+      <input type="password" id="password" required minlength="6"
+      autocomplete="new-password" placeholder="At least 6 characters">
+    </label>
+
+    <div id="confirm-wrap" style="display:none">
+      <label>Confirm password
+        <input type="password" id="confirm" minlength="6"
+        placeholder="Enter password again">
+      </label>
+    </div>
+
+    <button class="submit" id="submit-btn">LOG IN</button>
+  </form>
+
+  <div class="message" id="message"></div>
+  <p class="small">Your password is securely handled by Firebase.</p>
+</div>
+
+<!-- Customer profile -->
+<div id="signed-in" style="display:none">
+
+  <h2>👤 My Profile</h2>
+
+  <p class="profile-line">
+    <strong>Full name:</strong>
+    <span id="profile-name">Loading...</span>
+  </p>
+
+  <p class="profile-line">
+    <strong>Email:</strong>
+    <span id="profile-email"></span>
+  </p>
+
+  <p class="profile-line">
+    <strong>Phone:</strong>
+    <span id="profile-phone">Not added</span>
+  </p>
+
+  <button class="submit" id="edit-btn">EDIT PROFILE</button>
+
+  <form id="edit-form" style="display:none">
+
+    <label>Full name
+      <input type="text" id="edit-name" required>
+    </label>
+
+    <label>Phone number
+      <input type="tel" id="edit-phone" required>
+    </label>
+
+    <button class="submit" type="submit">SAVE CHANGES</button>
+  </form>
+
+  <div class="message" id="profile-message"></div>
+
+  <button class="submit" id="logout-btn">LOG OUT</button>
+
+</div>
+
+</section>
+</main>
+
+<footer>GA DONA KOTA • Kota ke kota ka borotho!</footer>
+
 <script type="module">
-import {auth} from './firebase-config.js';
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-let mode='login';const $=id=>document.getElementById(id);
-function setMode(m){mode=m;$('login-tab').classList.toggle('active',m==='login');$('register-tab').classList.toggle('active',m==='register');$('title').textContent=m==='login'?'Welcome back 👋':'Join the Ga Dona family 💛';$('intro').textContent=m==='login'?'Log in to your account.':'Create an account for quicker future orders.';$('confirm-wrap').style.display=m==='register'?'block':'none';$('submit-btn').textContent=m==='login'?'LOG IN':'CREATE ACCOUNT';$('message').textContent='';$('message').className='message';}
-$('login-tab').onclick=()=>setMode('login');$('register-tab').onclick=()=>setMode('register');
-$('auth-form').onsubmit=async e=>{e.preventDefault();$('message').textContent='Please wait…';const email=$('email').value.trim(),password=$('password').value;try{if(mode==='register'){if(password!==$('confirm').value)throw Error('Your passwords do not match.');await createUserWithEmailAndPassword(auth,email,password);}else await signInWithEmailAndPassword(auth,email,password);}catch(err){const map={'auth/email-already-in-use':'This email already has an account. Please log in.','auth/invalid-email':'Enter a valid email address.','auth/weak-password':'Use a password with at least 6 characters.','auth/invalid-credential':'Email or password is incorrect.','auth/too-many-requests':'Too many attempts. Please try later.'};$('message').textContent=map[err.code]||err.message;$('message').className='message error';}};
-$('logout-btn').onclick=()=>signOut(auth);onAuthStateChanged(auth,user=>{$('auth-area').style.display=user?'none':'block';$('signed-in').style.display=user?'block':'none';if(user)$('user-email').textContent=user.email;});
-</script></body></html>
+
+import { auth, db } from './firebase-config.js';
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+import {
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp
+} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+let mode = 'login';
+
+const $ = id => document.getElementById(id);
+
+function showMessage(text, type = '') {
+  $('message').textContent = text;
+  $('message').className = 'message ' + type;
+}
+
+function setMode(m) {
+  mode = m;
+
+  $('login-tab').classList.toggle('active', m === 'login');
+  $('register-tab').classList.toggle('active', m === 'register');
+
+  $('title').textContent =
+    m === 'login'
+    ? 'Welcome back 👋'
+    : 'Join the Ga Dona family 💛';
+
+  $('intro').textContent =
+    m === 'login'
+    ? 'Log in to your account.'
+    : 'Create an account for quicker future orders.';
+
+  $('name-wrap').style.display =
+    m === 'register' ? 'block' : 'none';
+
+  $('phone-wrap').style.display =
+    m === 'register' ? 'block' : 'none';
+
+  $('confirm-wrap').style.display =
+    m === 'register' ? 'block' : 'none';
+
+  $('fullname').required = m === 'register';
+  $('phone').required = m === 'register';
+  $('confirm').required = m === 'register';
+
+  $('submit-btn').textContent =
+    m === 'login' ? 'LOG IN' : 'CREATE ACCOUNT';
+
+  showMessage('');
+}
+
+$('login-tab').onclick = () => setMode('login');
+$('register-tab').onclick = () => setMode('register');
+
+$('auth-form').onsubmit = async e => {
+  e.preventDefault();
+
+  showMessage('Please wait…');
+
+  const email = $('email').value.trim();
+  const password = $('password').value;
+
+  try {
+
+    if (mode === 'register') {
+
+      const fullname = $('fullname').value.trim();
+      const phone = $('phone').value.trim();
+      const confirm = $('confirm').value;
+
+      if (password !== confirm) {
+        throw Error('Your passwords do not match.');
+      }
+
+      if (!fullname || !phone) {
+        throw Error('Please enter your name and phone number.');
+      }
+
+      // Create the Firebase account
+      const result = await createUserWithEmailAndPassword(
+        auth, email, password
+      );
+
+      // Save customer details in Firestore
+      await setDoc(doc(db, 'customers', result.user.uid), {
+        fullName: fullname,
+        email: email,
+        phone: phone,
+        createdAt: serverTimestamp()
+      });
+
+      showMessage('Account created successfully! 💛', 'success');
+
+    } else {
+
+      await signInWithEmailAndPassword(auth, email, password);
+
+    }
+
+  } catch (err) {
+
+    const map = {
+      'auth/email-already-in-use':
+        'This email already has an account. Please log in.',
+      'auth/invalid-email':
+        'Enter a valid email address.',
+      'auth/weak-password':
+        'Use a password with at least 6 characters.',
+      'auth/invalid-credential':
+        'Email or password is incorrect.',
+      'auth/too-many-requests':
+        'Too many attempts. Please try later.',
+      'permission-denied':
+        'Database permission denied. Check Firebase Rules.'
+    };
+
+    showMessage(map[err.code] || err.message, 'error');
+  }
+};
+
+// Load customer profile from Firestore
+async function loadProfile(user) {
+
+  $('profile-email').textContent = user.email || '';
+
+  try {
+
+    const ref = doc(db, 'customers', user.uid);
+    const snapshot = await getDoc(ref);
+
+    if (snapshot.exists()) {
+
+      const data = snapshot.data();
+
+      $('profile-name').textContent = data.fullName || 'Not added';
+      $('profile-phone').textContent = data.phone || 'Not added';
+
+      $('edit-name').value = data.fullName || '';
+      $('edit-phone').value = data.phone || '';
+
+    } else {
+
+      $('profile-name').textContent = 'Not added';
+      $('profile-phone').textContent = 'Not added';
+
+    }
+
+  } catch (err) {
+
+    $('profile-name').textContent = 'Unable to load';
+    $('profile-message').textContent =
+      'Could not load profile. Please try again.';
+
+  }
+}
+
+// Edit profile
+$('edit-btn').onclick = () => {
+
+  const form = $('edit-form');
+
+  form.style.display =
+    form.style.display === 'none' ? 'block' : 'none';
+
+};
+
+$('edit-form').onsubmit = async e => {
+
+  e.preventDefault();
+
+  const user = auth.currentUser;
+
+  if (!user) return;
+
+  $('profile-message').textContent = 'Saving…';
+
+  try {
+
+    await setDoc(doc(db, 'customers', user.uid), {
+      fullName: $('edit-name').value.trim(),
+      phone: $('edit-phone').value.trim(),
+      email: user.email
+    }, { merge: true });
+
+    $('profile-message').textContent = 'Profile updated successfully! 💛';
+    $('profile-message').className = 'message success';
+
+    await loadProfile(user);
+
+    $('edit-form').style.display = 'none';
+
+  } catch (err) {
+
+    $('profile-message').textContent =
+      'Could not save changes: ' + err.message;
+
+    $('profile-message').className = 'message error';
+
+  }
+
+};
+
+// Login state
+onAuthStateChanged(auth, async user => {
+
+  $('auth-area').style.display = user ? 'none' : 'block';
+  $('signed-in').style.display = user ? 'block' : 'none';
+
+  if (user) {
+    await loadProfile(user);
+  }
+
+});
+
+$('logout-btn').onclick = () => signOut(auth);
+
+</script>
+
+</body>
+</html>
